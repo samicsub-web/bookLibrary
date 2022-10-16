@@ -1,5 +1,6 @@
 # bookLibrary
 A simple Book Library
+<<<<<<< HEAD
 
 
 # Database
@@ -21,3 +22,5 @@ B. Admin
     password: password
 
 
+=======
+>>>>>>> 818fed58541995cf1607b40fedf6e6912e57c8ed
