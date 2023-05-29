@@ -58,9 +58,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(BookRequest::class);
     }
+    
+    public function my_requests()
+    {
+        return $this->hasMany(BookRequest::class)->where('user_id', auth()->id());
+    }
 
     public function books()
     {
         return $this->belongsToMany(Book::class, 'book_user')->withPivot('return_date', 'read_at')->withTimestamps();
+    }
+
+    public function rented_books()
+    {
+        return $this->books()->wherePivot('returned', false);
     }
 }

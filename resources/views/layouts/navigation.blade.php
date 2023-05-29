@@ -17,10 +17,36 @@
                     </x-nav-link>
                 </div>
                 
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('book.collection')" :active="request()->routeIs('book.collection')">
+                        {{ __('My Collection') }}
+                    </x-nav-link>
+                </div>
+                
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('book.request')" :active="request()->routeIs('book.request')">
+                        {{ __('My Book Requests') }}
+                    </x-nav-link>
+                </div>
+                
                 @can('admin')
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('book.index')" :active="request()->routeIs('book.index')">
                             {{ __('Book') }}
+                        </x-nav-link>
+                    </div>
+                @endcan
+                
+                @can('admin')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                            {{ __('Users') }}
+                        </x-nav-link>
+                    </div>
+                    
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('book.payments')" :active="request()->routeIs('book.payments')">
+                            {{ __('Payments') }}
                         </x-nav-link>
                     </div>
                 @endcan

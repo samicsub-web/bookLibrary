@@ -12,7 +12,8 @@ class Index extends Component
 
     public function render()
     {
-        $books = Book::paginate();
+        $books = Book::with(['reviews'])->withCount(['unprocessed_requests', 'current_borrowers'])->paginate();
+        
         return view('livewire.book.index', [
             'books' => $books
         ]);

@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('author');
             $table->string('description');
             $table->text('summary')->nullable();
-            $table->string('language');
-            $table->integer('category');
-            $table->integer('type'); //Keeps edition
+            $table->string('language')->nullable();
+            $table->integer('category')->nullable();
+            $table->integer('type')->nullable(); //Keeps edition
             $table->integer('pages');
             $table->integer('rent_count')->default(0);
             $table->string('isbn')->nullable();

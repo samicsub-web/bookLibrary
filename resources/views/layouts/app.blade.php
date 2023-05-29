@@ -10,7 +10,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.6/dist/full.css" rel="stylesheet" type="text/css" />
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireStyles
@@ -29,6 +29,8 @@
             @endif
 
             <!-- Page Content -->
+            <x-alert-message class="max-w-7xl mx-auto sm:px-6 lg:px-8"/>
+            
             <main>
                 {{ $slot }}
             </main>

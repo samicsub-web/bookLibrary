@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('book_id')->constrained('books')->cascadeOnDelete();
             $table->date('return_date');
+            $table->boolean('returned')->default(false);
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });

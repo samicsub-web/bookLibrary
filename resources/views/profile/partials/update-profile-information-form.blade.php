@@ -48,7 +48,10 @@
         </div>
 
         <div class="flex items-center gap-4">
+            @cannot('admin')
+                
             <x-primary-button>{{ __('Save') }}</x-primary-button>
+            @endcannot
 
             @if (session('status') === 'profile-updated')
                 <p

@@ -22,16 +22,22 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
-                                    Product name
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Color
+                                    Book Title
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Category
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Price
+                                    Rating/Reviews
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Price (NGN)
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Current Borrowers
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Borrow Requests
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     <span class="sr-only">Edit</span>
@@ -42,19 +48,32 @@
                             @forelse($books as $book)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $book->title }}
+                                    {{ \Illuminate\Support\Str::limit($book->title, 40) }}
                                 </th>
                                 <td class="px-6 py-4">
-                                    Silver
+                                    {{ $book->category->key }}
+                                </td>
+                                <td class="px-6 py-4 inline-flex items-center">
+                                    <x-reviews :count="round($book->reviews->avg('rating') ?? 0)"/> /
+                                    {{ $book->reviews->count() }} Reviews
                                 </td>
                                 <td class="px-6 py-4">
-                                    Laptop
+                                    @if($book->is_free)
+                                        Free
+                                    @else
+                                        NGN {{ $book->rent_price }}
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4">
-                                    $2999
+                                    {{ $book->current_borrowers_count }}
                                 </td>
-                                <td class="px-6 py-4 text-right">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                
+                                <td class="px-6 py-4">
+                                    {{ $book->unprocessed_requests_count }}
+                                </td>
+                                <td class="px-6 py-4 text-right inline-flex gap-3">
+                                    <a href="{{ route('book.edit', $book) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:sunderline">Edit</a>
+                                    <a href="{{ route('book.show', $book) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Show</a>
                                 </td>
                             </tr>
                             @empty
@@ -64,23 +83,7 @@
                                 </th>
                             </tr>
                             @endforelse
-                            <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Magic Mouse 2
-                                </th>
-                                <td class="px-6 py-4">
-                                    Black
-                                </td>
-                                <td class="px-6 py-4">
-                                    Accessories
-                                </td>
-                                <td class="px-6 py-4">
-                                    $99
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                </td>
-                            </tr>
+                            
                         </tbody>
 
                         <tfoot>
