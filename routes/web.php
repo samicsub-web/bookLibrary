@@ -12,6 +12,8 @@ use App\Http\Livewire\Transaction\Index as TransactionIndex;
 use App\Http\Livewire\User\Book;
 use App\Http\Livewire\User\Index as UserIndex;
 use App\Models\Book as ModelsBook;
+use App\Models\BookRequest;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
@@ -38,6 +40,8 @@ Route::get('/dashboard', function () {
     $books = ModelsBook::all();
     return view('dashboard', [
         'user' => Auth::user()->load(['books', 'my_requests' => fn($q) => $q->where('status', 0)]),
+        'users' => User::where('role', 2)->get(),
+        'requests' => BookRequest::where('status', 0)->get(),
         'books' => $books, 
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
